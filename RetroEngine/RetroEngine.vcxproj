@@ -133,11 +133,13 @@
   <ItemGroup>
     <ClCompile Include="glad\glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RetroEngine\FileSystem\FileUtility.cpp" />
     <ClCompile Include="RetroEngine\Graphics\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad\glad.h" />
     <ClInclude Include="KHR\khrplatform.h" />
+    <ClInclude Include="RetroEngine\FileSystem\FileUtility.h" />
     <ClInclude Include="RetroEngine\Graphics\Shader.h" />
   </ItemGroup>
   <ItemGroup>

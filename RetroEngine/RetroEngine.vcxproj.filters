@@ -24,6 +24,9 @@
     <ClCompile Include="RetroEngine\Graphics\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RetroEngine\FileSystem\FileUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad\glad.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RetroEngine\Graphics\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RetroEngine\FileSystem\FileUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

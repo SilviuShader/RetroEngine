@@ -1,14 +1,14 @@
 #include "Shader.h"
 
-#include <filesystem>
-
-#include <fstream>
 #include <iostream>
 
 #include "../../glad/glad.h"
 
+#include "../FileSystem/FileUtility.h"
+
 using namespace std;
-using namespace filesystem;
+
+using namespace RetroEngine::FileSystem;
 
 namespace RetroEngine::Graphics
 {
@@ -24,30 +24,23 @@ namespace RetroEngine::Graphics
 		glUseProgram(shaderProgram);
 	}
 
-	void Shader::CreateShader(Shader* shader, string vertexShaderFilename, string fragmentShaderFilename)
+	void Shader::CreateShader(Shader* shader, const string vertexShaderFilename, const string fragmentShaderFilename)
 	{
-		if (!exists(vertexShaderFilename))
+		const string vsStr = FileUtility::ReadFile(vertexShaderFilename);
+		if (vsStr.empty())
 		{
-			cout << "Can't open file " << vertexShaderFilename << endl;
+			cout << "Can't read Vertex Shader " << vertexShaderFilename << endl;
 			return;
 		}
 
-		if (!exists(fragmentShaderFilename))
+		const string fsStr = FileUtility::ReadFile(fragmentShaderFilename);
+		if (fsStr.empty())
 		{
-			cout << "Can't open file " << fragmentShaderFilename << endl;
+			cout << "Can't read Fragment Shader " << fragmentShaderFilename << endl;
 			return;
 		}
 
-		ifstream vsFileStream(vertexShaderFilename);
-		ifstream fsFileStream(fragmentShaderFilename);
-
-		string vsStr((istreambuf_iterator<char>(vsFileStream)),
-			istreambuf_iterator<char>());
-
-		string fsStr((istreambuf_iterator<char>(fsFileStream)),
-			istreambuf_iterator<char>());
-
-		const char* vertexShaderSource = vsStr.c_str();
+		const char* vertexShaderSource   = vsStr.c_str();
 		const char* fragmentShaderSource = fsStr.c_str();
 
 		shader->vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -84,9 +77,6 @@ namespace RetroEngine::Graphics
 			glGetProgramInfoLog(shader->shaderProgram, 512, nullptr, infoLog);
 			cout << "ERROR::PROGRAM::LINKING_FAILED\n" << infoLog << endl;
 		}
-
-		fsFileStream.close();
-		vsFileStream.close();
 	}
 	void Shader::DisposeShader(Shader* shader)
 	{
