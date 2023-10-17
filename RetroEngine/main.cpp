@@ -9,7 +9,7 @@ using namespace std;
 
 using namespace RetroEngine::Graphics;
 
-void FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
+void FrameBufferSizeCallback(GLFWwindow*, const int width, const int height)
 {
 	glViewport(0, 0, width, height);
 }
